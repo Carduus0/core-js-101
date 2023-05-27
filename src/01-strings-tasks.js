@@ -227,27 +227,24 @@ function getRectangleString(width, height) {
  *    => 'NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm'
  *
  */
-function encodeToRot13(/* str */) {
-  throw new Error('Not implemented');
-  /* const alphabet = 'abcdefghijklmnopqrstuvwxyz';
-  let shifredAB = '';
-  for (let i = 0; i < alphabet.length; i = 1) {
-    let currentLetter;
+function encodeToRot13(str) {
+  const result = [];
 
-    if (str[i + 13] === undefined) {
-      currentLetter = alphabet[i + 13 - alphabet.length];
-    } else {
-      currentLetter = alphabet[i + 13];
+  for (let i = 0; i < str.length; i += 1) {
+    let c = str.charAt(i);
+    const code = str.charCodeAt(i);
+
+    if (code >= 65 && code <= 90) {
+      c = String.fromCharCode(((code - 65 + 13) % 26) + 65);
+    } else if (code >= 97 && code <= 122) {
+      c = String.fromCharCode(((code - 97 + 13) % 26) + 97);
     }
-    shifredAB = shifredAB.concat(currentLetter);
+    result.push(c);
   }
-  let encryptedStr = '';
-  for (let i = 0; i < str.length; i + 1) {
-    const indexOfLetter = alphabet.indexOf(str[i].toUpperCase());
-    encryptedStr = encryptedStr.concat(shifredAB[indexOfLetter]);
-  }
-  return encryptedStr; */
+
+  return result.join('');
 }
+/*  throw new Error('Not implemented'); */
 
 /**
  * Returns true if the value is string; otherwise false.
@@ -293,8 +290,62 @@ function isString(value) {
  *   'Q♠' => 50
  *   'K♠' => 51
  */
-function getCardId(/* value */) {
-  throw new Error('Not implemented');
+function getCardId(value) {
+  const cardsOrder = [
+    'A♣',
+    '2♣',
+    '3♣',
+    '4♣',
+    '5♣',
+    '6♣',
+    '7♣',
+    '8♣',
+    '9♣',
+    '10♣',
+    'J♣',
+    'Q♣',
+    'K♣',
+    'A♦',
+    '2♦',
+    '3♦',
+    '4♦',
+    '5♦',
+    '6♦',
+    '7♦',
+    '8♦',
+    '9♦',
+    '10♦',
+    'J♦',
+    'Q♦',
+    'K♦',
+    'A♥',
+    '2♥',
+    '3♥',
+    '4♥',
+    '5♥',
+    '6♥',
+    '7♥',
+    '8♥',
+    '9♥',
+    '10♥',
+    'J♥',
+    'Q♥',
+    'K♥',
+    'A♠',
+    '2♠',
+    '3♠',
+    '4♠',
+    '5♠',
+    '6♠',
+    '7♠',
+    '8♠',
+    '9♠',
+    '10♠',
+    'J♠',
+    'Q♠',
+    'K♠',
+  ];
+  return cardsOrder.indexOf(value);
 }
 
 module.exports = {
